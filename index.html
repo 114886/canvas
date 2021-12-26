@@ -15,51 +15,56 @@
 
 <body>
   <!-- canvas这个玩意 一开始就要确定好它的宽高 你之后要在css里面改的话 会变得很模糊 它不会自适应 -->
-  <canvas id="canvas" width="100" height="100"></canvas>
+  <div id="view">
+    <canvas id="canvas" style="width:500;height:500"></canvas>
+  </div>
+  
   <script>
     let canvas = document.getElementById("canvas")
-    canvas.height = document.documentElement.clientHeight //获取到 文档 高度
-    canvas.width = document.documentElement.clientWidth //获取到 文档 宽度
+    canvas.height = document.getElementById("view").offsetHeight //获取到 div 高
+    canvas.width = document.getElementById("view").offsetWidth //获取到 div 宽
+    // canvas.height = document.documentElement.clientHeight //获取到 文档 高度
+    // canvas.width = document.documentElement.clientWidth //获取到 文档 宽度
     // canvas.height=document.body.clientHeight //获取到 body 高度 但是body默认不是占满屏幕 不用这个
     let ctx = canvas.getContext("2d")
     ctx.fillStyle = "blue"
     ctx.strokeStyle = 'none'
-    ctx.lineWidth=7
-    ctx.lineCap="round"
+    ctx.lineWidth = 7
+    ctx.lineCap = "round"
 
 
     let painting = false
     let last
 
-    function drawline(x1,y1,x2,y2) {
+    function drawline(x1, y1, x2, y2) {
       ctx.beginPath();
-      ctx.moveTo(x1,y1)
-      ctx.lineTo(x2,y2)
+      ctx.moveTo(x1, y1)
+      ctx.lineTo(x2, y2)
       ctx.stroke()
     }
-    var isTouchDevice = 'ontouchstart' in document.documentElement;//判断是否是手机
+    var isTouchDevice = 'ontouchstart' in document.documentElement; //判断是否是手机
     // console.log(isTouchDevice);
 
-// 连线的
+    // 连线的
     if (isTouchDevice) {
-      canvas.ontouchstart=(e)=>{
-        last=[e.touches[0].clientX,e.touches[0].clientY]
+      canvas.ontouchstart = (e) => {
+        last = [e.touches[0].clientX, e.touches[0].clientY]
       }
 
       canvas.ontouchmove = (e) => {
-        drawline(last[0],last[1],e.touches[0].clientX,e.touches[0].clientY)
-          last=[e.touches[0].clientX,e.touches[0].clientY]
+        drawline(last[0], last[1], e.touches[0].clientX, e.touches[0].clientY)
+        last = [e.touches[0].clientX, e.touches[0].clientY]
       }
     } else {
       canvas.onmousedown = (e) => {
         painting = true
-        last=[e.clientX,e.clientY]
+        last = [e.clientX, e.clientY]
       }
       canvas.onmousemove = (e) => {
         if (painting === true) {
           // ctx.fillRect(e.clientX-5,e.clientY-5,10,10) // 方形
-          drawline(last[0],last[1],e.clientX,e.clientY)
-          last=[e.clientX,e.clientY]
+          drawline(last[0], last[1], e.clientX, e.clientY)
+          last = [e.clientX, e.clientY]
         }
       }
       canvas.onmouseup = () => {
@@ -68,7 +73,7 @@
     }
 
 
-//打点 画快了连不起来
+    //打点 画快了连不起来
     // if (isTouchDevice) {
     //   canvas.ontouchmove = (e) => {
     //       // 手机上 有时候不止一个手指 所以 有touches这个东西 log一下 就能看到了

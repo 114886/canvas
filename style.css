@@ -1,9 +1,16 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-#canvas{
+#canvas {
   display: block;
+}
+
+#view {
+  background: url('./1.png') no-repeat;
+  height: 400px;
+  width: 300px;
+  background-size: cover;
 }
