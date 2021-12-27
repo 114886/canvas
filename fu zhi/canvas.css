@@ -1,0 +1,19 @@
+#canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.clearfix {
+  clear: both;
+}
+
+#black_btn {
+  background-color: black;
+}

@@ -6,13 +6,18 @@
   pointer-events: auto;
 }
 
+body {
+  min-height: 100vh;
+}
+
 #canvas {
   display: block;
 }
 
 #view {
-  background: url('./1.png') no-repeat;
-  height: 400px;
-  width: 300px;
+  background: url('./1.png') no-repeat 100%;
+  width: 100%;
+  min-height: 50vh;
   background-size: cover;
+  margin-top: 100px;
 }
